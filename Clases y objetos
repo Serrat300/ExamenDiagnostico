@@ -1,1 +1,88 @@
+#include<iostream>
+#include<stdlib.h>
+using namespace std;
+
+//Declaracion de la clase principal
+class Tarjeta
+{
+	//Atributos
+	private:
+		string titular; 
+		int numero;
+	//Métodos
+	public:
+		Tarjeta(string,int); //constructor
+		void datosTarjeta();
+};
+
+//Declaracion de las subclases
+class Credito : public Tarjeta
+{
+	private:
+		string fechalimite;
+		float saldoalcorte;
+	public:
+		Credito(string,int,string,float);
+		void datosCredito();	
+};
+
+class Debito : public Tarjeta
+{
+	private:
+		float balance;
+	public:
+		Debito(string,int,float);
+		void datosDebito();	
+};
+
+//Constructor para inicializar los atributos de la clase principal
+Tarjeta::Tarjeta(string _titular,int _numero){
+	titular = _titular;
+	numero = _numero;
+}
+
+void Tarjeta::datosTarjeta(){
+	cout<<"Titular: "<<titular<<endl;
+	cout<<"numero: "<<numero<<endl;
+}
+
+//Constructor para inicializar los atributos de la subclase
+Credito::Credito(string _titular,int _numero,string _fechalimite,float _saldoalcorte) : Tarjeta(_titular,_numero)
+{
+	fechalimite = _fechalimite;
+	saldoalcorte = _saldoalcorte;
+}
+
+void Credito::datosCredito(){
+	datosTarjeta();
+	cout<<"fechalimite: "<<fechalimite<<endl;
+	cout<<"saldoalcorte: "<<saldoalcorte<<endl;
+}
+
+//Constructor para inicializar los atributos de la subclase 2
+Debito::Debito(string _titular,int _numero,float _balance) : Tarjeta(_titular,_numero)
+{
+	balance = _balance;
+}
+
+void Debito::datosDebito(){
+	datosTarjeta();
+	cout<<"Balance: "<<balance<<endl;
+}
+
+int main()
+{
+	Credito C1 ("Karla",345678098345,"05/12",7000);
+	cout<<"-Tarjeta de Credito-"<<endl;
+	C1.datosCredito();
+	cout<<"\n";
+	
+	Debito D1 ("Maria",345678098345,4568.02);
+	cout<<"-Tarjeta de Debito-"<<endl;
+	D1.datosDebito();
+	cout<<"\n";
+	
+	system("pause");
+	return 0;
+}
 
